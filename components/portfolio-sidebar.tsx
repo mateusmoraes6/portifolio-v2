@@ -22,6 +22,13 @@ import { Download, FileText, Github, Home, Linkedin, Mail, User, X } from "lucid
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect } from "react"
+import type { LucideIcon } from "lucide-react"
+
+type SocialItem = {
+  name: string
+  href: string
+  icon: LucideIcon
+}
 
 const navigationItems = [
   { name: "Início", href: "#", icon: Home },
@@ -30,10 +37,10 @@ const navigationItems = [
   { name: "Contato", href: "#contact", icon: Mail },
 ]
 
-const socialItems = [
+const socialItems: SocialItem[] = [
   { name: "GitHub", href: "https://github.com/mateusmoraes6", icon: Github },
   { name: "LinkedIn", href: "https://www.linkedin.com/in/mateusmoraes6/", icon: Linkedin },
-  { name: "Gmail", href: "contatomateusmoraes6@gmail.com", icon: Mail },
+  { name: "Gmail", href: "mailto:contatomateusmoraes6@gmail.com", icon: Mail },
 ]
 
 export function PortfolioSidebar() {
@@ -108,20 +115,38 @@ export function PortfolioSidebar() {
         <SidebarFooter className="mt-auto border-t border-border/40 p-4">
           <div className="flex flex-col space-y-4">
             <div className="flex justify-center space-x-2">
-              {socialItems.map((item) => (
-                <Button
-                  key={item.name}
-                  variant="ghost"
-                  size="icon"
-                  asChild
-                  className="h-9 w-9 rounded-full transition-transform hover:scale-110 hover:bg-primary/10 hover:text-primary"
-                >
-                  <Link href={item.href} target="_blank">
-                    <item.icon className="h-4 w-4" />
-                    <span className="sr-only">{item.name}</span>
-                  </Link>
-                </Button>
-              ))}
+              {socialItems.map((item: SocialItem) => {
+                if (item.href.startsWith('mailto:')) {
+                  return (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        window.location.href = item.href
+                      }}
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-transparent text-muted-foreground transition-transform hover:scale-110 hover:bg-primary/10 hover:text-primary"
+                      aria-label={item.name}
+                    >
+                      <item.icon className="h-4 w-4" />
+                    </a>
+                  )
+                }
+                return (
+                  <Button
+                    key={item.name}
+                    variant="ghost"
+                    size="icon"
+                    asChild
+                    className="h-9 w-9 rounded-full transition-transform hover:scale-110 hover:bg-primary/10 hover:text-primary"
+                  >
+                    <Link href={item.href} target="_blank">
+                      <item.icon className="h-4 w-4" />
+                      <span className="sr-only">{item.name}</span>
+                    </Link>
+                  </Button>
+                )
+              })}
             </div>
             <div className="flex items-center justify-between">
               <p className="text-xs text-muted-foreground">© 2025 Mateus.dev</p>

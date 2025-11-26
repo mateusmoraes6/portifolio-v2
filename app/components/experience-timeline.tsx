@@ -46,6 +46,34 @@ const experiences: Experience[] = [
     skills: ["Data Analytics", "Data Calculations", "Excel", "SQL", "Google Cloud"],
     current: false,
   },
+  {
+    id: 3,
+    role: "Suporte em TI",
+    company: "Coursera | Google",
+    location: "Remoto",
+    period: "2025",
+    description: [
+      "Limpar e organizar dados para análise e concluir análises e cálculos.",
+      "Preparação de dados para exploração.",
+      "Analisar dados para responder perguntas.",
+    ],
+    skills: ["Suporte", "DNS", "IPV4", "Powershell", "Serviço de Diretórios", "Modelo de Redes"],
+    current: false,
+  },
+  // {
+  //   id: 4,
+  //   role: "Suporte de redes",
+  //   company: "Coursera | Google",
+  //   location: "Remoto",
+  //   period: "2025",
+  //   description: [
+  //     "Limpar e organizar dados para análise e concluir análises e cálculos.",
+  //     "Preparação de dados para exploração.",
+  //     "Analisar dados para responder perguntas.",
+  //   ],
+  //   skills: ["Documentation", "Help Desk", "Support", "User Support"],
+  //   current: false,
+  // },
 ]
 
 export default function ExperienceTimeline() {
@@ -149,6 +177,24 @@ export default function ExperienceTimeline() {
                         <a href="https://www.credly.com/badges/f4d1b1c1-3a9b-4591-aa02-a512914e9758/linked_in?t=srl03f" target="_blank" rel="noopener noreferrer" className="absolute top-2 right-2 w-10 h-10">
                           <img
                             src="/google-certificate.png"
+                            alt="Certificado Google Data Analytics"
+                            className="object-contain"
+                          />
+                        </a>
+                      )}
+                      {experience.id === 3 && (
+                        <a href="https://www.credly.com/badges/e554f219-1d98-4163-a749-c8adc4f59e5c/public_url" target="_blank" rel="noopener noreferrer" className="absolute top-2 right-2 w-10 h-10">
+                          <img
+                            src="/support-certificate.png"
+                            alt="Certificado Google Data Analytics"
+                            className="object-contain"
+                          />
+                        </a>
+                      )}
+                      {experience.id === 4 && (
+                        <a href="https://www.credly.com/badges/4a76f332-3264-4fc9-9e3f-dbc425178942/public_url" target="_blank" rel="noopener noreferrer" className="absolute top-2 right-2 w-10 h-10">
+                          <img
+                            src="/network-support-and-security.png"
                             alt="Certificado Google Data Analytics"
                             className="object-contain"
                           />

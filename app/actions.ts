@@ -1,17 +1,31 @@
 "use server"
 
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 export async function submitContactForm(formData: FormData) {
-  // Simulate a delay
-  await new Promise((resolve) => setTimeout(resolve, 1000))
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+  const message = formData.get("message") as string;
 
-  const name = formData.get("name")
-  const email = formData.get("email")
-  const message = formData.get("message")
+  try {
+    await resend.emails.send({
+      from: 'Seu Portfolio <onboarding@resend.dev>', // Inicialmente use este email
+      to: 'contatomateusmoraes6@gmail.com', // Substitua pelo seu email onde quer receber as mensagens
+      subject: `Nova mensagem de contato de ${name}`,
+      text: `
+        Nome: ${name}
+        Email: ${email}
+        Mensagem: ${message}
+      `,
+    });
 
-  // Here you would typically send an email or save to a database
-  console.log("Form submission:", { name, email, message })
-
-  return {
-    message: "Thanks for your message! I'll get back to you soon.",
+    return {
+      message: "Obrigado pela sua mensagem! Entrarei em contato em breve.",
+    };
+  } catch (error) {
+    console.error('Erro ao enviar email:', error);
+    throw new Error('Falha ao enviar a mensagem. Por favor, tente novamente.');
   }
 }
