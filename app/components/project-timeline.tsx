@@ -3,7 +3,8 @@
 
 import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
-import { Github, Calendar, ChevronRight, MapPin } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Github, Calendar, ChevronRight, MapPin, ExternalLink } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
@@ -13,7 +14,9 @@ interface Project {
     title: string
     description: string[]
     image: string
+    secondaryImage?: string
     link: string
+    visitLink?: string
     period: string
     location: string
     tags: string[]
@@ -27,8 +30,10 @@ const projects: Project[] = [
             "Plataforma full-stack de e-commerce com Next.js e Tailwind.",
             "UI/UX modernos em harmonia com o Brainding da marca."
         ],
-        image: "/ecommercepreview.png",
+        image: "/Macbook-Air-elegance-acessorios.png",
+        secondaryImage: "/iPhone-13-PRO-MAX-elegance-acessorios.png",
         link: "https://github.com",
+        visitLink: "https://elegance-acessorios.netlify.app/",
         period: "2025",
         location: "Remoto",
         tags: ["Next.js", "Node.js", "TypeScript", "Tailwind"]
@@ -40,8 +45,10 @@ const projects: Project[] = [
             "Aplicação para gestão financeira.",
             "App open source."
         ],
-        image: "/moneyhubpreview.png",
+        image: "/Macbook-Air-moneyhub.png",
+        secondaryImage: "/iPhone-13-PRO-MAX-moneyhub.png",
         link: "https://github.com/mateusmoraes6/moneyhub",
+        visitLink: "#",
         period: "2025",
         location: "Remoto",
         tags: ["React", "Node.js", "TypeScript", "Tailwind", "Supabase"]
@@ -55,6 +62,7 @@ const projects: Project[] = [
         ],
         image: "/crmpreview.png",
         link: "https://github.com/mateusmoraes6/frontend-crm",
+        visitLink: "#",
         period: "2025",
         location: "Remoto",
         tags: ["React", "Node", "JavaScript", "CSS", "MongoDB", "Axios", "Zod"]
@@ -176,13 +184,46 @@ export default function ProjectTimeline() {
                                                 </Badge>
                                             ))}
                                         </div>
-                                        <div className="w-full aspect-video relative rounded-lg overflow-hidden border mt-2">
-                                            <Image
-                                                src={project.image}
-                                                alt={project.title}
-                                                fill
-                                                className="object-cover"
-                                            />
+
+                                        <div className="flex gap-3 mt-4">
+                                            {project.visitLink && (
+                                                <Link href={project.visitLink} target="_blank" className="flex-1">
+                                                    <Button variant="default" className="w-full gap-2 font-medium">
+                                                        <ExternalLink className="h-4 w-4" /> Acessar Aplicação
+                                                    </Button>
+                                                </Link>
+                                            )}
+                                        </div>
+                                        <div className="w-full aspect-video relative rounded-lg overflow-hidden border mt-2 bg-[#F5F5F7] dark:bg-[#1d1d1f]">
+                                            {project.secondaryImage ? (
+                                                <div className="flex h-full w-full gap-3 p-3">
+                                                    <div className="relative flex-[2.2] rounded-md overflow-hidden shadow-sm bg-white/50 dark:bg-black/20">
+                                                        <Image
+                                                            src={project.image}
+                                                            alt={`${project.title} - Macbook View`}
+                                                            fill
+                                                            className="object-contain p-1"
+                                                            priority={project.id === 1}
+                                                        />
+                                                    </div>
+                                                    <div className="relative flex-1 rounded-md overflow-hidden shadow-sm bg-white/50 dark:bg-black/20">
+                                                        <Image
+                                                            src={project.secondaryImage}
+                                                            alt={`${project.title} - iPhone View`}
+                                                            fill
+                                                            className="object-contain p-1"
+                                                            priority={project.id === 1}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <Image
+                                                    src={project.image}
+                                                    alt={project.title}
+                                                    fill
+                                                    className="object-cover"
+                                                />
+                                            )}
                                         </div>
                                     </div>
                                 </Card>
