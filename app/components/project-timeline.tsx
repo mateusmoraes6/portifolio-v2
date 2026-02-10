@@ -60,9 +60,10 @@ const projects: Project[] = [
             "Plataforma MERN Stack para gestão.",
             "Dashboard intuitivo com opções para uso."
         ],
-        image: "/crmpreview.png",
+        image: "/Macbook-Air-clientcrmdemo.png",
+        secondaryImage: "/iPhone-13-PRO-MAX-clientcrmdemo.png",
         link: "https://github.com/mateusmoraes6/frontend-crm",
-        visitLink: "#",
+        visitLink: "https://clientcrmdemo.netlify.app/",
         period: "2025",
         location: "Remoto",
         tags: ["React", "Node", "JavaScript", "CSS", "MongoDB", "Axios", "Zod"]
