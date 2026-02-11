@@ -49,13 +49,10 @@ export default function AboutSection() {
         if (entry.isIntersecting) {
           setIsVisible(true)
           observer.unobserve(entry.target)
-          // Trigger connection animation after section becomes visible
+          // Dispara a animação da linha de energia e,
+          // depois que ela "carrega", mantém a conexão visível.
           setTimeout(() => {
             setShowConnections(true)
-            // Fade out connections after animation completes
-            setTimeout(() => {
-              setShowConnections(false)
-            }, 3000) // Total animation duration + display time
           }, 500)
         }
       },
@@ -125,7 +122,7 @@ export default function AboutSection() {
           </div>
 
           <div
-            className={`mt-32 w-full max-w-5xl transition-all duration-700 delay-300 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            className={`mt-24 w-full max-w-5xl transition-all duration-700 delay-300 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
           >
 
@@ -141,35 +138,39 @@ export default function AboutSection() {
                     viewBox="0 0 100 100"
                     preserveAspectRatio="none"
                   >
-                    {/* Desktop Path: Straight line through centers */}
-                    <path
-                      d="M 12.5,40 L 87.5,40"
+                    {/* Desktop: linha orgânica bem colada nos quatro símbolos */}
+                    {/* <path
+                      d="M 18,34 H 82 Q 90,34 90,42 V 58 Q 90,66 82,66 H 18 Q 10,66 10,58 V 42 Q 10,34 18,34"
                       fill="none"
                       stroke="white"
-                      strokeWidth="0.5"
-                      strokeDasharray="100 100"
-                      strokeDashoffset="100"
+                      strokeWidth="1"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeDasharray="260 260"
+                      strokeDashoffset="260"
                       className="hidden md:block transition-opacity duration-500"
                       style={{
                         animation: 'drawLineContinuous 2s ease-in-out forwards',
                         opacity: showConnections ? 0.4 : 0,
                       }}
-                    />
+                    /> */}
 
-                    {/* Mobile Path: U-shaped flow (0 -> 1 -> 3 -> 2) */}
-                    <path
-                      d="M 25,25 L 75,25 Q 85,25 85,35 L 85,65 Q 85,75 75,75 L 25,75"
+                    {/* Mobile: mesma lógica, envolvendo por completo o grid 2x2 */}
+                    {/* <path
+                      d="M 20,22 H 80 Q 90,22 90,32 V 68 Q 90,78 80,78 H 20 Q 10,78 10,68 V 32 Q 10,22 20,22"
                       fill="none"
                       stroke="white"
                       strokeWidth="1"
-                      strokeDasharray="200 200"
-                      strokeDashoffset="200"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeDasharray="260 260"
+                      strokeDashoffset="260"
                       className="block md:hidden transition-opacity duration-500"
                       style={{
                         animation: 'drawLineContinuous 2.5s ease-in-out forwards',
                         opacity: showConnections ? 0.4 : 0,
                       }}
-                    />
+                    /> */}
                   </svg>
                 )}
 
