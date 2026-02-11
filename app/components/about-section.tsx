@@ -1,6 +1,6 @@
 "use client"
 
-import type React from "react"
+import React from "react"
 
 import { Card } from "@/components/ui/card"
 import { Award, BrainCircuit, Code, ChartNoAxesCombined, Rocket, User, Mail } from "lucide-react"
@@ -39,6 +39,8 @@ const strengths: Strength[] = [
 
 export default function AboutSection() {
   const [isVisible, setIsVisible] = useState(false)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [showConnections, setShowConnections] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -47,6 +49,14 @@ export default function AboutSection() {
         if (entry.isIntersecting) {
           setIsVisible(true)
           observer.unobserve(entry.target)
+          // Trigger connection animation after section becomes visible
+          setTimeout(() => {
+            setShowConnections(true)
+            // Fade out connections after animation completes
+            setTimeout(() => {
+              setShowConnections(false)
+            }, 3000) // Total animation duration + display time
+          }, 500)
         }
       },
       {
@@ -115,28 +125,84 @@ export default function AboutSection() {
           </div>
 
           <div
-            className={`mt-16 w-full max-w-5xl transition-all duration-700 delay-300 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            className={`mt-32 w-full max-w-5xl transition-all duration-700 delay-300 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
           >
-            <h3 className="text-2xl font-semibold mb-8 text-center">Funções</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {strengths.map((strength, index) => (
-                <Card
-                  key={strength.title}
-                  className={`p-6 border border-primary/10 hover:border-primary/30 hover:shadow-md transform hover:-translate-y-1 transition-all duration-700 delay-${300 + index * 100} ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-                    }`}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="p-2 rounded-full bg-primary/10 text-primary">
-                      <strength.icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-lg mb-2">{strength.title}</h4>
-                      <p className="text-muted-foreground">{strength.description}</p>
-                    </div>
-                  </div>
-                </Card>
-              ))}
+
+
+            <div className="flex flex-col items-center gap-12">
+              {/* Seletor de Ícones Interativo */}
+              <div className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-8 md:gap-12 relative p-4">
+                {/* Connection Lines SVG Overlay */}
+                {showConnections && (
+                  <svg
+                    className="absolute inset-0 w-full h-full pointer-events-none"
+                    style={{ zIndex: 0 }}
+                    viewBox="0 0 100 100"
+                    preserveAspectRatio="none"
+                  >
+                    {/* Desktop Path: Straight line through centers */}
+                    <path
+                      d="M 12.5,40 L 87.5,40"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="0.5"
+                      strokeDasharray="100 100"
+                      strokeDashoffset="100"
+                      className="hidden md:block transition-opacity duration-500"
+                      style={{
+                        animation: 'drawLineContinuous 2s ease-in-out forwards',
+                        opacity: showConnections ? 0.4 : 0,
+                      }}
+                    />
+
+                    {/* Mobile Path: U-shaped flow (0 -> 1 -> 3 -> 2) */}
+                    <path
+                      d="M 25,25 L 75,25 Q 85,25 85,35 L 85,65 Q 85,75 75,75 L 25,75"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="1"
+                      strokeDasharray="200 200"
+                      strokeDashoffset="200"
+                      className="block md:hidden transition-opacity duration-500"
+                      style={{
+                        animation: 'drawLineContinuous 2.5s ease-in-out forwards',
+                        opacity: showConnections ? 0.4 : 0,
+                      }}
+                    />
+                  </svg>
+                )}
+
+                {strengths.map((strength, index) => {
+                  const isActive = activeIndex === index;
+                  return (
+                    <button
+                      key={strength.title}
+                      onClick={() => setActiveIndex(index)}
+                      className={`relative group flex flex-col items-center gap-3 transition-all duration-500 ${isActive ? "scale-110" : "hover:scale-105 opacity-70 hover:opacity-100"
+                        }`}
+                      style={{ zIndex: 1 }}
+                    >
+                      <div className={`relative p-5 rounded-2xl transition-all duration-500 ${isActive
+                        ? "bg-primary text-primary-foreground shadow-[0_0_20px_rgba(var(--primary),0.3)]"
+                        : "bg-background text-primary border border-primary/10 group-hover:bg-primary/10"
+                        }`}>
+                        <strength.icon className={`h-8 w-8 transition-transform duration-500 ${isActive ? "rotate-[360deg]" : "group-hover:rotate-12"
+                          }`} />
+
+                        {/* Glow effect animação */}
+                        {isActive && (
+                          <div className="absolute inset-0 rounded-2xl animate-ping border-2 border-primary/40 pointer-events-none" />
+                        )}
+                      </div>
+                      <span className={`text-sm font-medium transition-all duration-300 ${isActive ? "text-primary opacity-100" : "text-muted-foreground opacity-0 group-hover:opacity-100"
+                        }`}>
+                        {strength.title}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
 

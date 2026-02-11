@@ -109,7 +109,7 @@ export default function ExperienceTimeline() {
   }, [])
 
   return (
-    <div ref={timelineRef} className="mt-24 w-full max-w-5xl mx-auto">
+    <div ref={timelineRef} className="mt-48 w-full max-w-5xl mx-auto">
       <div className="flex items-center gap-2 mb-10 justify-center">
         <GraduationCap className="h-6 w-6 text-primary" />
         <h3 className="text-2xl font-bold">Formação Profissional</h3>
@@ -151,9 +151,8 @@ export default function ExperienceTimeline() {
 
                 {/* Timeline connector */}
                 <div
-                  className={`hidden md:block absolute top-5 h-px w-12 bg-primary/40 z-0 ${
-                    isEven ? "left-0 -translate-x-full" : "right-0 translate-x-full"
-                  }`}
+                  className={`hidden md:block absolute top-5 h-px w-12 bg-primary/40 z-0 ${isEven ? "left-0 -translate-x-full" : "right-0 translate-x-full"
+                    }`}
                 />
 
                 <Card
