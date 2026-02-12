@@ -76,7 +76,7 @@ export function PortfolioSidebar() {
             </Badge>
           </div>
           <h2 className="text-xl font-bold">Mateus Moraes</h2>
-          <p className="text-sm text-muted-foreground">Full Stack Developer</p>
+          <p className="text-sm text-muted-foreground">   Analista de Sistemas <br /> Desenvolvedor Full Stack</p>
         </SidebarHeader>
 
         <SidebarContent className="px-2">
@@ -149,7 +149,7 @@ export function PortfolioSidebar() {
               })}
             </div>
             <div className="flex items-center justify-between">
-              <p className="text-xs text-muted-foreground">© 2026 Mateus.dev</p>
+              <p className="text-xs text-muted-foreground">© 2026 Mateus Moraes</p>
               <ThemeToggle />
             </div>
           </div>
@@ -174,7 +174,7 @@ export function PortfolioSidebarWrapper({ children }: { children: React.ReactNod
         <div className="flex-1">
           <div className="sticky top-0 z-50 flex h-14 items-center border-b bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:hidden">
             <SidebarTrigger className="mr-2" />
-            <span className="font-bold">Mateus.dev</span>
+            <span className="font-bold">Mateus Moraes</span>
           </div>
           <main className="flex-1">{children}</main>
         </div>

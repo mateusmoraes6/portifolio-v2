@@ -13,7 +13,7 @@ export default function Page() {
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                  Full Stack Developer
+                  Analista de Sistemas <br /> & <br /> Desenvolvedor Full Stack
                 </h1>
                 <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
                   Desenvolvendo experiências digitais.
@@ -59,7 +59,7 @@ export default function Page() {
 
       <footer className="border-t">
         <div className="container flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6">
-          <p className="text-xs text-gray-500 dark:text-gray-400">© 2026 Mateus.dev. All rights reserved.</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400">© 2026 Mateus Moraes. All rights reserved.</p>
           <nav className="sm:ml-auto flex gap-4 sm:gap-6">
             <a className="text-xs hover:underline underline-offset-4" href="#">
               Terms of Service

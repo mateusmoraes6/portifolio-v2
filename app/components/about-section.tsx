@@ -112,7 +112,7 @@ export default function AboutSection() {
                 }`}
             >
               <p className="text-lg leading-relaxed">
-                Desenvolvedor Full Stack em formação, cursando Análise e Desenvolvimento de Sistemas. Desenvolvendo experiência com desenvolvimento de projetos web e análise de dados.
+                Formado em Análise e Desenvolvimento de Sistemas, desenvolvo projetos Full Stack com foco em desenvolvimento de projetos web e análise de dados.
               </p>
 
               <p className="text-lg leading-relaxed">
